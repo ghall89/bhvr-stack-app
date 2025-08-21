@@ -8,7 +8,6 @@
     "dev": "bun --watch run src/index.ts"
   },
   "dependencies": {
-    "bgg-client": "^1.1.2",
     "hono": "^4.7.11",
     "shared": "workspace:*"
   },
