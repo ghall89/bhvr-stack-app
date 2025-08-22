@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import type { ApiResponse } from "shared/dist";
+import { logger } from "hono/logger";
 
 import { BGGController } from "./controllers/bgg.controller";
 
@@ -8,15 +8,7 @@ const app = new Hono();
 const bgg = new BGGController();
 
 app.use(cors());
-
-app.get("/hello", async (c) => {
-  const data: ApiResponse = {
-    message: "Hello BHVR!",
-    success: true,
-  };
-
-  return c.json(data, { status: 200 });
-});
+app.use(logger());
 
 bgg.routes(app);
 

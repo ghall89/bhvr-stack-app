@@ -1,7 +1,6 @@
 import { eq } from "drizzle-orm";
-import db from "../db";
-import { bggCacheTable } from "@shared/db/schema";
-import type { BggCacheInsert } from "@shared/types";
+import { db } from "../db";
+import { bggCacheTable, type BggCacheInsert } from "db/src/db/schema";
 
 export class BGGCacheService {
   db = db;
@@ -14,6 +13,12 @@ export class BGGCacheService {
     return await this.db
       .select()
       .from(bggCacheTable)
+      .where(eq(bggCacheTable.endpoint, endpoint));
+  }
+
+  async delete(endpoint: string) {
+    await this.db
+      .delete(bggCacheTable)
       .where(eq(bggCacheTable.endpoint, endpoint));
   }
 }
