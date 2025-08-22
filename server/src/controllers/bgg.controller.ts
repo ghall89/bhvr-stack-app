@@ -5,7 +5,8 @@ export class BGGController {
   private bggClient = bgg;
 
   private async hot(c: Context) {
-    const res = await this.bggClient.hot();
+    const category = c.req.query("c") as any;
+    const res = await this.bggClient.hot({ type: category || undefined });
     return c.json(res);
   }
 

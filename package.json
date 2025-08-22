@@ -20,7 +20,10 @@
     "build:server": "turbo build --filter=server",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
-    "postinstall": "turbo build --filter=shared --filter=server"
+    "postinstall": "turbo build --filter=shared --filter=server",
+    "db:push": "drizzle-kit push ",
+    "db:generate": "drizzle-kit generate ",
+    "db:migrate": "drizzle-kit migrate"
   },
   "keywords": [
     "bun",
@@ -32,6 +35,7 @@
   ],
   "devDependencies": {
     "bun-types": "latest",
+    "drizzle-kit": "^0.31.4",
     "turbo": "^2.5.5"
   },
   "peerDependencies": {

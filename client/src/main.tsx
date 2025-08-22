@@ -5,6 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 
+import Layout from "./layouts/layout";
+import "./index.css";
+
 const queryClient = new QueryClient();
 
 // Import the generated route tree
@@ -35,7 +38,9 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <Theme>
         <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
+          <Layout>
+            <RouterProvider router={router} />
+          </Layout>
         </QueryClientProvider>
       </Theme>
     </StrictMode>,

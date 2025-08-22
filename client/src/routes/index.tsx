@@ -1,35 +1,48 @@
-import { Container, Text, Grid, Box, Tooltip } from "@radix-ui/themes";
+import { Box, Select, Flex, Heading } from "@radix-ui/themes";
 import { createFileRoute } from "@tanstack/react-router";
-import { type HotItem } from "bgg-client";
+import { useState } from "react";
 
-import { useQuery } from "@tanstack/react-query";
-
-import { getRequest } from "../utils/api";
+import HotItemsGrid from "../components/hot-items-grid";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
 function Index() {
-  const { data, isLoading } = useQuery({
-    queryFn: () => getRequest<HotItem[]>("bgg/hot"),
-    queryKey: ["bgg-hot"],
-  });
+  const [category, setCategory] = useState("boardgame");
+
+  const options = [
+    {
+      label: "Board Game",
+      value: "boardgame",
+    },
+    {
+      label: "Designer",
+      value: "boardgameperson",
+    },
+    {
+      label: "Publisher",
+      value: "boardgamecompany",
+    },
+  ];
 
   return (
-    <Container>
-      {isLoading || !data ? (
-        <Text>Loading...</Text>
-      ) : (
-        <Grid columns="3" align="center">
-          {data.map((item) => (
-            <Tooltip key={item.id} content={item.name.value}>
-              <img src={item.thumbnail.value} alt={item.name.value} />
-            </Tooltip>
-          ))}
-        </Grid>
-      )}
-    </Container>
+    <Box>
+      <Flex justify="between" align="center" my="3">
+        <Heading as="h2">Hot on BGG</Heading>
+        <Select.Root value={category} onValueChange={setCategory}>
+          <Select.Trigger />
+          <Select.Content>
+            {options.map((option) => (
+              <Select.Item key={option.value} value={option.value}>
+                {option.label}
+              </Select.Item>
+            ))}
+          </Select.Content>
+        </Select.Root>
+      </Flex>
+      <HotItemsGrid category={category} />
+    </Box>
   );
 }
 
