@@ -2,14 +2,13 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 
-import { BGGController } from "./controllers/bgg.controller";
+import bggRoutes from "./routes/bgg";
 
 const app = new Hono();
-const bgg = new BGGController();
 
 app.use(cors());
 app.use(logger());
 
-bgg.routes(app);
+app.route("/bgg", bggRoutes);
 
 export default app;
