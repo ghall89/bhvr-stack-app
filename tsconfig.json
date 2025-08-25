@@ -13,7 +13,7 @@
     "paths": {
       "@server/*": ["./server/src/*"],
       "@client/*": ["./client/src/*"],
-      "@db/*": ["db/src/*"]
+      "@db/*": ["./db/src/*"]
     },
 
     // Module resolution

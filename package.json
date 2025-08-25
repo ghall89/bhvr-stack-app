@@ -1,16 +1,26 @@
 {
   "name": "my-app",
   "version": "0.4.0",
-  "description": "A monorepo template built with Bun, Hono, Vite, and React",
   "author": "Steve Simkins",
-  "license": "MIT",
+  "devDependencies": {
+    "bun-types": "latest",
+    "turbo": "^2.5.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.7.3"
+  },
+  "description": "A monorepo template built with Bun, Hono, Vite, and React",
   "homepage": "https://github.com/stevedylandev/bhvr",
-  "packageManager": "bun@1.2.4",
-  "workspaces": [
-    "./server",
-    "./client",
-    "./db"
+  "keywords": [
+    "bun",
+    "hono",
+    "react",
+    "vite",
+    "monorepo",
+    "turbo"
   ],
+  "license": "MIT",
+  "packageManager": "bun@1.2.4",
   "scripts": {
     "dev": "turbo dev",
     "dev:client": "turbo dev --filter=client",
@@ -20,27 +30,16 @@
     "build:server": "turbo build --filter=server",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
-    "postinstall": "turbo build --filter=db --filter=server",
-    "db:push": "drizzle-kit push ",
-    "db:generate": "drizzle-kit generate ",
-    "db:migrate": "drizzle-kit migrate"
+    "postinstall": "turbo build  --filter=server",
+    "db:push": "turbo -F server push",
+    "db:studio": "turbo -F server db:studio",
+    "db:generate": "turbo -F server db:generate",
+    "db:migrate": "turbo -F server db:migrate"
   },
-  "keywords": [
-    "bun",
-    "hono",
-    "react",
-    "vite",
-    "monorepo",
-    "turbo"
+  "workspaces": [
+    "./server",
+    "./client"
   ],
-  "devDependencies": {
-    "bun-types": "latest",
-    "drizzle-kit": "^0.31.4",
-    "turbo": "^2.5.5"
-  },
-  "peerDependencies": {
-    "typescript": "^5.7.3"
-  },
   "dependencies": {
     "bgg-client": "^1.1.2"
   }

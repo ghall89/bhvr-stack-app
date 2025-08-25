@@ -9,6 +9,7 @@ const app = new Hono();
 app.use(cors());
 app.use(logger());
 
+app.get("/health", (c) => c.json({ status: "OK" }));
 app.route("/bgg", bggRoutes);
 
 export default app;

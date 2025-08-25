@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { db } from "../db";
-import { bggCacheTable, type BggCacheInsert } from "db/src/db/schema";
+import { bggCacheTable, type BggCacheInsert } from "../db/schema";
 
 export class BGGCacheService {
   db = db;

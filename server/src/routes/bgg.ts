@@ -2,10 +2,12 @@ import bgg from "bgg-client";
 import { Hono, type Context } from "hono";
 
 import { wrapper } from "@server/utils/wrapper";
+import { cacheMiddleware } from "@server/middleware/cache";
 
 const app = new Hono();
 
-app.get("/hot", (c) => {
+app.get("/hot", cacheMiddleware, (c) => {
+  console.log(c.var.cachedJson);
   return wrapper(c, async () => {
     const category = c.req.query("c") as any;
 
